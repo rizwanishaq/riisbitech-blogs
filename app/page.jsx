@@ -9,6 +9,7 @@ export default function Home() {
     <>
       {/* Hero Section */}
       <HeroSection />
+
       {/* Features Section */}
       <FeaturesSection />
 
@@ -17,9 +18,6 @@ export default function Home() {
 
       {/* CTA Section */}
       <CTASection />
-
-      {/* Footer Section */}
-      <Footer />
     </>
   );
 }
