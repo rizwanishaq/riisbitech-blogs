@@ -12,9 +12,10 @@ const page = () => {
         link_url="/image-generation"
       />
       <Projectitem
-        title={"Release of Tailwind Nextjs Starter Blog v2.0"}
-        keywords={["nextjs", "features", "tailwind"]}
-        link_url="/another"
+        title={"WebScrapping"}
+        keywords={["jsdom", "data scrapping", "web scraping"]}
+        description={"Just a simple way to scrap the web page to get data."}
+        link_url="/data-scrapping"
       />
     </section>
   );

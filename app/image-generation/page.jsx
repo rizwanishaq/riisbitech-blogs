@@ -45,8 +45,8 @@ const ImageGeneration = () => {
           }
           width={512}
           height={512}
-          alt=""
-          className="shadow-2xl"
+          alt="generated image"
+          className="shadow-2xl rounded-lg"
         />
 
         <form onSubmit={handleSubmit} className=" text-darkGrayishBlue">

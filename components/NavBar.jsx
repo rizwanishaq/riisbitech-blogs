@@ -5,7 +5,7 @@ import { useState } from "react";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(true);
   return (
-    <nav className="relative container mx-auto p-6">
+    <nav className="relative container mx-auto p-6 rounded-lg">
       <div className="flex items-center justify-between">
         <Link href="/">
           <div className="pt-2 flex gap-2 justify-between">
