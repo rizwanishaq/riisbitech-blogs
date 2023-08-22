@@ -6,11 +6,11 @@ const page = () => {
     <section>
       {projects_list.map((project) => (
         <Projectitem
+          key={project.title}
           title={project.title}
           keywords={project.keywords}
           description={project.description}
           link_url={project.link_url}
-          key={project.link_url}
         />
       ))}
     </section>
