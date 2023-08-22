@@ -43,11 +43,11 @@ const TestimonialsSection = () => {
           />
         </div>
         {/* Button */}
-        <div className="my-16">
+        {/* <div className="my-16">
           <button className="p-3 px-6 pt-2 text-white bg-brightRed rounded-full hover:bg-brightRedLight">
             <Link href="/">Get Started</Link>
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
