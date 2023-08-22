@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 const Projectitem = ({ title, keywords, description, link_url }) => {
-  console.log(keywords);
   return (
     <div className="container px-5 mx-auto mt-5 text-left mb-5">
       <div className="space-y-5 xl:col-span-3">

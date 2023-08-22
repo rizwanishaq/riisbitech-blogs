@@ -32,7 +32,7 @@ const Scrapping = () => {
     e.preventDefault();
     try {
       setIsLoading(false);
-      const response = await fetch("/api/data-scrapping", {
+      const response = await fetch("/api/projects/data-scrapping", {
         method: "POST",
         body: JSON.stringify({
           product_url: product_url,

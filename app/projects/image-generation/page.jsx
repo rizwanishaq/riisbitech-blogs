@@ -1,5 +1,4 @@
 "use client";
-import Loader from "@/components/Loader";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -15,7 +14,7 @@ const ImageGeneration = () => {
     try {
       setImage("");
       setProcessing(true);
-      const response = await fetch("/api/generate-image", {
+      const response = await fetch("/api/projects/generate-image", {
         method: "POST",
         body: JSON.stringify({
           prompt: prompt,
