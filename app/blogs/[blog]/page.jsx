@@ -1,5 +1,6 @@
 import axios from "axios";
-import Markdown from "markdown-to-jsx";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 async function fetchRepoContents(blog) {
   //   await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -19,7 +20,8 @@ const GetReadme = async ({ params: { blog } }) => {
 
   return (
     <div className="container px-5 mx-auto mt-5 text-left">
-      <Markdown>{markdown}</Markdown>
+      {/* <Markdown>{markdown}</Markdown> */}
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
     </div>
   );
 };

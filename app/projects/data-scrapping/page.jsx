@@ -7,6 +7,7 @@ import DataTable, { createTheme } from "react-data-table-component";
 const Scrapping = () => {
   const [product_url, setProduct_URL] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const [data, setData] = useState([]);
   const columns = [
     {
@@ -31,7 +32,8 @@ const Scrapping = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setIsLoading(false);
+      setError("");
+      setIsLoading(true);
       const response = await fetch("/api/projects/data-scrapping", {
         method: "POST",
         body: JSON.stringify({
@@ -42,6 +44,7 @@ const Scrapping = () => {
       setData((prev) => [...prev, product_info]);
       setIsLoading(false);
     } catch (error) {
+      setError(error.message);
       setIsLoading(false);
     }
   };
@@ -76,11 +79,13 @@ const Scrapping = () => {
                 <button
                   type="submit"
                   className="px-6 py-2 text-white rounded-full bg-brightRed hover:bg-brightRedLight focus:outline-none"
+                  disabled={isLoading}
                 >
-                  Go
+                  {isLoading ? "processing" : "Go"}
                 </button>
               </div>
             </form>
+            {error && <p className="text-red-500">{error.message}</p>}
           </div>
         </div>
 

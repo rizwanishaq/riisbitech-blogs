@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   try {
     const { product_url } = await req.json();
+    console.log(product_url);
 
     const response = await fetch(product_url);
     const html = await response.text();
@@ -27,7 +28,6 @@ export async function POST(req) {
 
     return NextResponse.json({ product_info: product_info });
   } catch (error) {
-    console.log(error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
