@@ -44,8 +44,10 @@ const ImageGeneration = () => {
           }
           width={512}
           height={512}
-          alt="generated image"
+          alt=""
           className="shadow-2xl rounded-lg"
+          placeholder="blur"
+          blurDataURL="/assets/images/logo.svg"
         />
 
         <form onSubmit={handleSubmit} className=" text-darkGrayishBlue">

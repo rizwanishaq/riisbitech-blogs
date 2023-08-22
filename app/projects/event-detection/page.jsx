@@ -43,7 +43,7 @@ const EventDetection = () => {
   }, []);
   return (
     <section className="flex items-center justify-center min-w-screen p-4">
-      {start && (
+      {start && model && (
         <ProcessAudio
           labels={labels}
           model={model}
