@@ -55,13 +55,25 @@ const NavBar = () => {
             isOpen ? "hidden" : ""
           } self-end  py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md`}
         >
-          <Link href="/blogs" className="hover:text-darkGrayishBlue">
+          <Link
+            href="/blogs"
+            className="hover:text-darkGrayishBlue"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             Blogs
           </Link>
-          <Link href="/projects" className="hover:text-darkGrayishBlue">
+          <Link
+            href="/projects"
+            className="hover:text-darkGrayishBlue"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             Projects
           </Link>
-          <Link href="/about" className="hover:text-darkGrayishBlue">
+          <Link
+            href="/about"
+            className="hover:text-darkGrayishBlue"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             About
           </Link>
         </div>

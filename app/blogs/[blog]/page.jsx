@@ -1,6 +1,7 @@
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+// import rehypeHighlight from "rehype-highlight";
 
 async function fetchRepoContents(blog) {
   //   await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -21,7 +22,12 @@ const GetReadme = async ({ params: { blog } }) => {
   return (
     <div className="container px-5 mx-auto mt-5 text-left">
       {/* <Markdown>{markdown}</Markdown> */}
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        // rehypePlugins={[rehypeHighlight]}
+      >
+        {markdown}
+      </ReactMarkdown>
     </div>
   );
 };
