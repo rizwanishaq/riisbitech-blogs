@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const BlogItem = ({ title, keywords, description, url }) => {
+const BlogItem = ({ title, keywords, description, url, contents }) => {
   return (
     <div className="container px-5 mx-auto mt-5 text-left mb-5">
       <div className="space-y-5 xl:col-span-3">
@@ -9,7 +9,7 @@ const BlogItem = ({ title, keywords, description, url }) => {
             <h2 className="text-2xl font-bold leading-8 tracking-tight">
               <Link
                 className="text-gray-900 dark:text-gray-100"
-                href={`/blogs/${title}`}
+                href={`/blogs/${url}?contents=${contents}`}
               >
                 {title}
               </Link>
@@ -29,7 +29,7 @@ const BlogItem = ({ title, keywords, description, url }) => {
         </div>
         <div className="text-base font-medium leading-6">
           <button className="p-3 px-6 pt-2 text-white bg-brightRed rounded-full hover:bg-brightRedLight">
-            <Link href={`/blogs/${url}`}>Read more →</Link>
+            <Link href={`/blogs/${url}?contents=${contents}`}>Read more →</Link>
           </button>
         </div>
       </div>

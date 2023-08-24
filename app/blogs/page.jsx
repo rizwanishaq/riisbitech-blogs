@@ -1,23 +1,24 @@
+import { MDXRemote } from "next-mdx-remote/rsc";
 import BlogItem from "@/components/BlogItem";
-import blogs_list from "@/utils/blogs-list";
+// import blogs_list from "@/utils/blogs-list";
+import { getPostsMeta } from "@/lib/posts";
+import "highlight.js/styles/github-dark.css";
 
-const page = () => {
+const page = async () => {
+  const blogs_list = await getPostsMeta();
+  console.log(blogs_list);
+
   return (
     <>
-      {/* <nav className="relative container mx-auto p-6 text-left ">
-        <h2 className="text-3xl font-bold text-left">Blogs</h2>
-        <p className="text-sm text-darkGrayishBlue">
-          Latest blogs with different technologies
-        </p>
-      </nav> */}
       <section>
         {blogs_list.map((blog) => (
           <BlogItem
-            key={blog.key}
-            title={blog.title}
-            keywords={blog.keywords}
-            description={blog.description}
-            url={blog.key}
+            key={blog.meta.id}
+            title={blog.meta.title}
+            keywords={blog.meta.tags}
+            // description={blog.meta.description}
+            url={blog.meta.title}
+            contents={blog.meta.fileName}
           />
         ))}
       </section>
