@@ -1,5 +1,5 @@
 import Prism from "prismjs";
-import "prismjs/themes/prism-base16-ateliersulphurpool.light.css";
+// import "prismjs/themes/prism-base16-ateliersulphurpool.light.css";
 import "prismjs/components/prism-jsx";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { compileMDX } from "next-mdx-remote/rsc";
