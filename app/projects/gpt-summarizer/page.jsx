@@ -1,5 +1,5 @@
 "use client";
-import { Upload, ChevronLeft, ChevronRight } from "lucide-react";
+import { Upload, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import { useState } from "react";
 import { pdfjs, Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
@@ -16,7 +16,7 @@ const page = () => {
   const [file, setFile] = useState();
   const [numPages, setNumPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // Initialize with page 1
-  const [width, setWdith] = useState(400);
+  const [width, setWidth] = useState(400);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,14 +74,7 @@ const page = () => {
         </div>
 
         {file && (
-          <div
-            className="flex items-center mt-1 mb-1 shadow-2xl"
-            onClick={(e) => {
-              if (width === 400) {
-                setWdith(800);
-              } else setWdith(400);
-            }}
-          >
+          <div className="flex items-center mt-1 mb-1 shadow-2xl">
             <button
               onClick={goToPreviousPage}
               disabled={currentPage === 1}
@@ -95,7 +88,33 @@ const page = () => {
                 onLoadSuccess={onDocumentLoadSuccess}
                 options={options}
               >
-                <Page pageNumber={currentPage} width={width} />
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <Page pageNumber={currentPage} width={width} />
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                      zIndex: 999, // Higher z-index to make the icon clickable
+                    }}
+                  >
+                    <Maximize2
+                      className="cursor-pointer text-brightRedSupLight hover:text-brightRedLight"
+                      onClick={() => {
+                        if (width === 400) {
+                          setWidth(800);
+                        } else setWidth(400);
+                      }}
+                    />
+                  </div>
+                </div>
               </Document>
             </div>
             <button
