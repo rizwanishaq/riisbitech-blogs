@@ -95,7 +95,11 @@ const page = () => {
                     height: "100%",
                   }}
                 >
-                  <Page pageNumber={currentPage} width={width} />
+                  <Page
+                    pageNumber={currentPage}
+                    width={width}
+                    className="transition ease-in-out delay-150"
+                  />
                   <div
                     style={{
                       position: "absolute",
