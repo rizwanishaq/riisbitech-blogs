@@ -1,9 +1,15 @@
+import Prism from "prismjs";
+import "prismjs/themes/prism-base16-ateliersulphurpool.light.css";
+import "prismjs/components/prism-jsx";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings/lib";
 import rehypeHighlight from "rehype-highlight/lib";
 import rehypeSlug from "rehype-slug";
-import "highlight.js/styles/github-dark.css";
+import rehypePrettyCode from "rehype-pretty-code";
+import remarkGfm from "remark-gfm";
+import "highlight.js/styles/atom-one-dark.css";
+
 async function fetchRepoContents(blog) {
   //   await new Promise((resolve) => setTimeout(resolve, 3000));
   const response = await fetch(
@@ -19,12 +25,43 @@ async function fetchRepoContents(blog) {
     source: rawMDX,
     options: { parseFrontmatter: true },
     mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      components: {
+        h1: ({ children }) => (
+          <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+            {children}
+          </h1>
+        ),
+      },
       rehypePlugins: [
-        rehypeHighlight,
         rehypeSlug,
+        rehypeHighlight,
+        [
+          rehypePrettyCode,
+          {
+            theme: "github-light",
+            onVisitLine(node) {
+              // Prevent lines from collapsing in `display: grid` mode, and allow empty
+              // lines to be copy/pasted
+              if (node.children.length === 0) {
+                node.children = [{ type: "text", value: " " }];
+              }
+            },
+            onVisitHighlightedLine(node) {
+              node.properties.className.push("line--highlighted");
+            },
+            onVisitHighlightedWord(node) {
+              node.properties.className = ["word--highlighted"];
+            },
+          },
+        ],
         [
           rehypeAutolinkHeadings,
           {
+            properties: {
+              className: ["subheading-anchor"],
+              ariaLabel: "Link to section",
+            },
             behavior: "wrap",
           },
         ],
@@ -32,13 +69,17 @@ async function fetchRepoContents(blog) {
     },
   });
 
-  return { content };
+  return { frontmatter, content };
 }
 
 const GetReadme = async ({ params, searchParams: { contents } }) => {
-  const { content } = await fetchRepoContents(contents);
+  const { frontmatter, content } = await fetchRepoContents(contents);
 
-  return <div className="container px-5 mx-auto mt-5 text-left">{content}</div>;
+  return (
+    <div className="container px-5 mx-auto mt-5 text-left">
+      <article>{content}</article>
+    </div>
+  );
 };
 
 export default GetReadme;

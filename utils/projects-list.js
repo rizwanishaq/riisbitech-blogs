@@ -17,6 +17,12 @@ const projects_list = [
     description: "Just a simple way to detect events in audio.",
     link_url: "/projects/event-detection",
   },
+  {
+    title: "GPT-Summarizer",
+    keywords: ["Summary", "pdf reader", "deep learning", "gpt-3.5"],
+    description: "Summary provider for the given pdf using gpt.",
+    link_url: "/projects/gpt-summarizer",
+  },
 ];
 
 export default projects_list;
