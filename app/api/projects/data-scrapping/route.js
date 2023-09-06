@@ -59,7 +59,9 @@ export async function POST(req) {
 
     return NextResponse.json({ products });
   } catch (error) {
-    return new NextResponse("Internal error", { status: 500 });
+    return new NextResponse(`Internal error  - ${error.message}`, {
+      status: 500,
+    });
   } finally {
     if (browser) {
       await browser.close();

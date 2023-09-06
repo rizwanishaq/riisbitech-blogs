@@ -53,7 +53,7 @@ const Scrapping = () => {
     <section id="scrapping">
       <div className="container flex flex-col md:flex-row items-center px-6 mx-auto mt-10 space-y-0 md:space-y-0">
         {/* Left Item */}
-        <div className="flex flex-col mb-32 space-y-12 md:w-1/2">
+        <div className="flex flex-col mb-32 space-y-12 md:w-1/2 sticky top-0">
           <h1 className="max-w-md text-2xl font-bold text-center  md:text-left">
             Streamlined Web Scraping for Comprehensive Product Information
           </h1>
