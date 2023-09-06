@@ -1,6 +1,6 @@
 "use client";
 import UploadIcon from "@/components/UploadIcon";
-import { useState } from "react";
+import React, { useState } from "react";
 const page = () => {
   const [file, setFile] = useState(null);
 
