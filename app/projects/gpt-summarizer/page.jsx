@@ -1,7 +1,7 @@
 "use client";
+import { useState } from "react";
 import UploadIcon from "@/components/UploadIcon";
-import React, { useState } from "react";
-const page = () => {
+const GPTSummary = () => {
   const [file, setFile] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -42,4 +42,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default GPTSummary;
