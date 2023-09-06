@@ -1,33 +1,68 @@
 import { JSDOM } from "jsdom";
 import { NextResponse } from "next/server";
+import puppeteer from "puppeteer";
+import * as cheerio from "cheerio";
 
 // import { sendSMS } from "@/utils/twilio-config";
 
 export async function POST(req) {
+  let browser;
+
   try {
-    const { product_url } = await req.json();
-    console.log(product_url);
+    const { product_search } = await req.json();
 
-    const response = await fetch(product_url);
-    const html = await response.text();
+    browser = await puppeteer.launch({ headless: "new" });
+    const page = await browser.newPage();
+    await page.goto("https://www.amazon.com");
+    await page.type("#twotabsearchtextbox", product_search);
+    await page.keyboard.press("Enter");
+    await page.waitForNavigation();
 
-    const dom = new JSDOM(html);
+    const html = await page.content();
+    const $ = cheerio.load(html);
 
-    const document = dom.window.document;
+    const prices = $("span.a-offscreen")
+      .map((index, element) => {
+        return $(element).text();
+      })
+      .get();
 
-    const product_id = document
-      .querySelector("#productTitle")
-      .textContent.trim();
+    const titles = $("span.a-size-base-plus.a-color-base.a-text-normal")
+      .map((index, element) => {
+        return $(element).text();
+      })
+      .get();
 
-    const price = document.querySelector(".a-price .a-offscreen").textContent;
+    const reviews = $("span.a-size-base.s-underline-text")
+      .map((index, element) => {
+        return $(element).text();
+      })
+      .get();
 
-    // const message = sendSMS({ body: `Price of ${product_id} is ${price}` });
-    // console.log(message);
+    const imageUrls = $("img.s-image")
+      .map((index, element) => {
+        return $(element).attr("src");
+      })
+      .get();
 
-    const product_info = { price, product_id, product_url };
+    const products = [];
 
-    return NextResponse.json({ product_info: product_info });
+    for (let i = 0; i < titles.length; i++) {
+      const item = {
+        price: prices[i],
+        title: titles[i],
+        review: reviews[i],
+        imageUrl: imageUrls[i],
+      };
+      products.push(item);
+    }
+
+    return NextResponse.json({ products });
   } catch (error) {
     return new NextResponse("Internal error", { status: 500 });
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
   }
 }

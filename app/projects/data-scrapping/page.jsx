@@ -5,14 +5,14 @@ import { useState } from "react";
 import DataTable, { createTheme } from "react-data-table-component";
 
 const Scrapping = () => {
-  const [product_url, setProduct_URL] = useState("");
+  const [product_search, setProduct_Search] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [data, setData] = useState([]);
   const columns = [
     {
       name: "Product",
-      selector: (row) => row.product_id,
+      selector: (row) => row.title,
       wrap: true,
     },
     {
@@ -20,10 +20,10 @@ const Scrapping = () => {
       selector: (row) => row.price,
     },
     {
-      name: "product_url",
+      name: "imageUrl",
       selector: (row) => (
-        <Link href={row.product_url} target="_blank">
-          {row.product_url}
+        <Link href={row.imageUrl} target="_blank">
+          {row.imageUrl}
         </Link>
       ),
       maxWidth: "100px",
@@ -37,11 +37,11 @@ const Scrapping = () => {
       const response = await fetch("/api/projects/data-scrapping", {
         method: "POST",
         body: JSON.stringify({
-          product_url: product_url,
+          product_search: product_search,
         }),
       });
-      const { product_info } = await response.json();
-      setData((prev) => [...prev, product_info]);
+      const { products } = await response.json();
+      setData(products);
       setIsLoading(false);
     } catch (error) {
       setError(error.message);
@@ -69,10 +69,10 @@ const Scrapping = () => {
             <form onSubmit={handleSubmit} className=" text-darkGrayishBlue">
               <div className="flex space-x-3 max-w-2xl w-full">
                 <input
-                  value={product_url}
-                  onChange={(e) => setProduct_URL(e.target.value)}
+                  value={product_search}
+                  onChange={(e) => setProduct_Search(e.target.value)}
                   type="text"
-                  placeholder="Insert the url of the product"
+                  placeholder="Search product"
                   required
                   className="flex-1 px-6 rounded-full focus:outline-none bg-veryPaleRed"
                 />

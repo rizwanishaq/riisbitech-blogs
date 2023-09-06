@@ -1,9 +1,6 @@
 "use client";
-import PdfViewer from "@/components/PdfViewer";
 import UploadIcon from "@/components/UploadIcon";
-import { Upload } from "lucide-react";
 import { useState } from "react";
-
 const page = () => {
   const [file, setFile] = useState(null);
 
