@@ -14,6 +14,7 @@ export async function POST(req) {
     browser = await puppeteer.launch({ headless: "new" });
     const page = await browser.newPage();
     await page.goto("https://www.amazon.com");
+    console.log("it is reaching here at least");
     await page.type("#twotabsearchtextbox", product_search);
     await page.keyboard.press("Enter");
     await page.waitForNavigation();
