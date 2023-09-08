@@ -44,6 +44,11 @@ export async function POST(req) {
         return $(element).attr("src");
       })
       .get();
+    const ItemUrls = $("a.a-link-normal")
+      .map((index, element) => {
+        return $(element).attr("href");
+      })
+      .get();
 
     const products = [];
 
@@ -53,6 +58,7 @@ export async function POST(req) {
         title: titles[i],
         review: reviews[i],
         imageUrl: imageUrls[i],
+        itemUrl: `https://www.amazon.com${ItemUrls[i]}`,
       };
       products.push(item);
     }

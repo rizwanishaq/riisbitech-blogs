@@ -12,7 +12,11 @@ const Scrapping = () => {
   const columns = [
     {
       name: "Product",
-      selector: (row) => row.title,
+      selector: (row) => (
+        <Link href={row.itemUrl} target="_blank">
+          {row.title}
+        </Link>
+      ),
       wrap: true,
     },
     {
@@ -23,7 +27,7 @@ const Scrapping = () => {
       name: "imageUrl",
       selector: (row) => (
         <Link href={row.imageUrl} target="_blank">
-          {row.imageUrl}
+          <img src={row.imageUrl} width="54px" height="54px" />
         </Link>
       ),
       maxWidth: "100px",
@@ -96,6 +100,7 @@ const Scrapping = () => {
             columns={columns}
             data={data}
             progressPending={isLoading}
+            pagination
           />
         </div>
       </div>
