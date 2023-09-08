@@ -30,6 +30,13 @@ const projects_list = [
       "Translate the text from one language to another using huggingface.",
     link_url: "/projects/translate",
   },
+  {
+    title: "AI Quiz",
+    keywords: ["huggingface", "gpt-3.5", "deep learning"],
+    description:
+      "AI Quiz provider for the given question using huggingface and gpt-3.5.",
+    link_url: "/projects/ai-quiz",
+  },
 ];
 
 export default projects_list;
