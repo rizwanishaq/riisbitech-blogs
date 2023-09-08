@@ -1,3 +1,4 @@
+"use client";
 import Projectitem from "@/components/Projectitem";
 import projects_list from "@/utils/projects-list";
 
