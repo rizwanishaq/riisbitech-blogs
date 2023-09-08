@@ -31,10 +31,15 @@ const AIQuiz = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await runPattern(
-      `AI : ${response}\n: ${input}\nAI: Evaluate the answer and ask another trivia question`
-    );
-    setResponse(result);
+    const result = await fetch("/api/projects/ai-quiz", {
+      method: "post",
+      body: JSON.stringify({
+        input: `AI : ${response}\n: ${input}\nAI: Evaluate the answer and ask another trivia question`,
+      }),
+    });
+
+    const response_ = await result.json();
+    setResponse(response_.response);
     setInput("");
   };
 

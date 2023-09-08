@@ -1,21 +1,21 @@
-import { OpenAI } from "langchain/llms/openai";
+import { ChatOpenAI } from "langchain/chat_models/openai";
 import { BufferMemory } from "langchain/memory";
 import { ConversationChain } from "langchain/chains";
 
 import { NextResponse } from "next/server";
 
-const model = new OpenAI({
+const llm = new ChatOpenAI({
   openAIApiKey: process.env.OPENAI_API_KEY,
   temperature: 0.9,
 });
 
-const memory = new BufferMemory();
+// const memory = new BufferMemory();
 
-const chain = new ConversationChain({ llm: model, memory: memory });
+const chain = new ConversationChain({ llm: llm });
 
 const run = async (input) => {
   try {
-    const response = await chain.run({ input: input });
+    const { response } = await chain.call({ input: input });
     return response;
   } catch (error) {
     console.log(error);
@@ -24,7 +24,8 @@ const run = async (input) => {
 };
 
 const askFirstQuestion = async (category) => {
-  const input = `Can you ask any question about ${category}`;
+  const input = `Ask a trivia question about ${category} category `;
+
   const firstQuestion = await run(input);
   return firstQuestion;
 };
@@ -40,6 +41,7 @@ export async function POST(req) {
     }
 
     const response = await run(input);
+    console.log(response);
 
     return NextResponse.json({
       response: response,
