@@ -23,6 +23,13 @@ const projects_list = [
     description: "Summary provider for the given pdf using gpt.",
     link_url: "/projects/gpt-summarizer",
   },
+  {
+    title: "Translation",
+    keywords: ["huggingface", "translate", "deep learning"],
+    description:
+      "Translate the text from one language to another using huggingface.",
+    link_url: "/projects/translate",
+  },
 ];
 
 export default projects_list;
