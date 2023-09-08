@@ -1,9 +1,8 @@
 "use client";
-import React, { useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import Image from "next/image";
 
-const page = () => {
+const Translate = () => {
   const [translatedText, setTranslatedText] = useState("");
   const [inputText, setInputText] = useState("");
   const [language, setLanguage] = useState("en-es");
@@ -11,14 +10,13 @@ const page = () => {
 
   const fetchTranslation = async () => {
     setProcessing(true);
-    const response = await axios({
+    const response = await fetch("/api/projects/translate", {
       method: "post",
-      url: "/api/projects/translate", // Your serverless function endpoint
-      data: { text: inputText, lang: language }, // Sending the selected language to the backend
-      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: inputText, lang: language }),
     });
 
-    setTranslatedText(response.data.translation_text);
+    const { translation_text } = await response.json();
+    setTranslatedText(translation_text);
     setProcessing(false);
   };
 
@@ -92,4 +90,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Translate;
